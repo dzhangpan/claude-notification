@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 280" width="100%" max-width="600px" style="border-radius: 8px; background-color: #212121; overflow: hidden;">
+  <defs>
+    <style>
+      /* <![CDATA[ */
+      /* Master Loop: 4.0 seconds (faster active animation + 1 second hold at the end) */
+      .master-jump {
+        animation: jumpArc 4s infinite;
+        transform-origin: 120px 210px; 
+      }
+      .master-squash {
+        animation: squashStretch 4s infinite;
+        transform-origin: 120px 210px; 
+      }
+      .body-tilt {
+        animation: tiltTwist 4s infinite;
+        transform-origin: 120px 150px;
+      }
+      .face-shift {
+        animation: lookRight 4s infinite;
+      }
+      
+      /* Independent Limbs */
+      .arm-left {
+        animation: waveLeft 4s infinite;
+        transform-origin: 85px 150px; 
+      }
+      .arm-right {
+        animation: dragRight 4s infinite;
+        transform-origin: 155px 150px; 
+      }
+      .leg-1 { animation: legTuckHigh 4s infinite; transform-origin: 90px 180px; }
+      .leg-2 { animation: legTuckMid 4s infinite; transform-origin: 110px 180px; }
+      .leg-3 { animation: legReach 4s infinite; transform-origin: 130px 180px; }
+      .leg-4 { animation: legTuckLow 4s infinite; transform-origin: 150px 180px; }
+      .shadow { animation: shadowPulse 4s infinite; transform-origin: 120px 210px; }
+
+      /* --- Master Trajectory (Enhanced Ease-In & Ease-Out) --- */
+      @keyframes jumpArc {
+        0%, 9% { transform: translateY(0); }
+        /* Launch up: ease-out (slows down at the top) */
+        12% { transform: translateY(0); animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); } 
+        /* Apex: ease-in (accelerates falling down) */
+        24% { transform: translateY(-65px); animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0); } 
+        /* Impact & Mini Jump Launch (Faster landing) */
+        37% { transform: translateY(0); animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1); } 
+        /* Mini Apex */
+        45% { transform: translateY(-22.5px); animation-timing-function: cubic-bezier(0.32, 0, 0.67, 0); } 
+        /* Land & Hold for the rest of the 4s loop */
+        52%, 100% { transform: translateY(0); }
+      }
+
+      /* --- Squash & Stretch --- */
+      @keyframes squashStretch {
+        0%, 6% { transform: scale(1, 1); }
+        10.5% { transform: scale(1.25, 0.75); animation-timing-function: cubic-bezier(0.4, 0, 1, 1); } 
+        13.5% { transform: scale(0.75, 1.3); animation-timing-function: ease-out; } 
+        24% { transform: scale(0.95, 1.05); animation-timing-function: ease-in; } 
+        35% { transform: scale(0.85, 1.2); } 
+        37% { transform: scale(1.35, 0.65); animation-timing-function: ease-out; } 
+        45% { transform: scale(0.9, 1.1); animation-timing-function: ease-in; } 
+        52% { transform: scale(1.2, 0.8); } 
+        58% { transform: scale(0.95, 1.05); } 
+        65%, 100% { transform: scale(1, 1); } /* Hold perfect shape */
+      }
+
+      /* --- Asymmetrical Twist --- */
+      @keyframes tiltTwist {
+        0%, 9% { transform: rotate(0deg); }
+        10.5% { transform: rotate(-5deg); } 
+        18.75%, 33.75% { transform: rotate(8deg); } 
+        37% { transform: rotate(-3deg); } 
+        45% { transform: rotate(5deg); } 
+        52% { transform: rotate(-2deg); }
+        60%, 100% { transform: rotate(0deg); } /* Hold straight */
+      }
+      @keyframes lookRight {
+        0%, 11% { transform: translateX(0); }
+        18.75%, 33.75% { transform: translateX(10px); } 
+        37%, 100% { transform: translateX(0); }
+      }
+
+      /* --- Left Arm (Continuous Wave) --- */
+      @keyframes waveLeft {
+        0%, 9% { transform: rotate(0deg) translateY(0); }
+        10.5% { transform: rotate(-25deg) translateY(5px); } 
+        18.75% { transform: translateY(-25px) rotate(-45deg) translateX(-5px); }
+        21% { transform: translateY(-25px) rotate(-85deg) translateX(-10px); }
+        24% { transform: translateY(-25px) rotate(-45deg) translateX(-5px); }
+        27% { transform: translateY(-25px) rotate(-85deg) translateX(-10px); }
+        30% { transform: translateY(-25px) rotate(-45deg) translateX(-5px); }
+        33% { transform: translateY(-25px) rotate(-85deg) translateX(-10px); }
+        37% { transform: translateY(-15px) rotate(-45deg) translateX(-5px); }
+        42% { transform: translateY(-25px) rotate(-85deg) translateX(-10px); }
+        47% { transform: translateY(-25px) rotate(-45deg) translateX(-5px); }
+        52% { transform: translateY(-10px) rotate(-25deg) translateX(-5px); }
+        60%, 100% { transform: rotate(0deg) translateY(0); } /* Arm rests during hold */
+      }
+
+      /* --- Right Arm (Drag) --- */
+      @keyframes dragRight {
+        0%, 9% { transform: rotate(0deg) translateY(0); }
+        10.5% { transform: rotate(-10deg) translateY(6px); } 
+        16.5%, 30% { transform: rotate(25deg) translateY(-12.5px); } 
+        35% { transform: rotate(35deg) translateY(-17.5px); } 
+        37% { transform: rotate(-15deg) translateY(12.5px); } 
+        45% { transform: rotate(10deg) translateY(-5px); } 
+        52% { transform: rotate(-5deg) translateY(5px); }
+        60%, 100% { transform: rotate(0deg) translateY(0); }
+      }
+
+      /* --- Asymmetrical Legs --- */
+      @keyframes legTuckHigh { 
+        0%, 11% { transform: translateY(0) scaleY(1); }
+        18.75%, 33.75% { transform: translateY(-17.5px) scaleY(0.6); }
+        37%, 100% { transform: translateY(0) scaleY(1); }
+      }
+      @keyframes legTuckMid { 
+        0%, 11% { transform: translateY(0) scaleY(1); }
+        18.75%, 33.75% { transform: translateY(-10px) scaleY(0.8); }
+        37%, 100% { transform: translateY(0) scaleY(1); }
+      }
+      @keyframes legReach { 
+        0%, 11% { transform: translateY(0); }
+        18.75%, 28% { transform: translateY(2.5px) rotate(-5deg); }
+        33.75% { transform: translateY(7.5px) rotate(-10deg); } 
+        37%, 100% { transform: translateY(0) rotate(0); }
+      }
+      @keyframes legTuckLow { 
+        0%, 11% { transform: translateY(0); }
+        18.75%, 33.75% { transform: translateY(-5px); }
+        37%, 100% { transform: translateY(0); }
+      }
+
+      /* --- Ground Shadow --- */
+      @keyframes shadowPulse {
+        0%, 9% { transform: scale(1); opacity: 0.6; }
+        10.5% { transform: scale(1.3); opacity: 0.8; }
+        13.5% { transform: scale(0.6); opacity: 0.4; }
+        24% { transform: scale(0.4); opacity: 0.2; }
+        35% { transform: scale(0.9); opacity: 0.6; }
+        37% { transform: scale(1.4); opacity: 0.8; }
+        45% { transform: scale(0.7); opacity: 0.4; }
+        52% { transform: scale(1.1); opacity: 0.7; }
+        60%, 100% { transform: scale(1); opacity: 0.6; }
+      }
+      /* ]]> */
+    </style>
+  </defs>
+
+  <ellipse class="shadow" cx="120" cy="210" rx="45" ry="8" fill="#111" />
+
+  <g class="master-jump">
+    <g class="master-squash">
+      <g class="body-tilt">
+        
+        <rect class="arm-left" x="65" y="140" width="20" height="20" fill="#D87B60" />
+
+        <rect class="leg-1" x="85" y="180" width="10" height="30" fill="#D87B60" />
+        <rect class="leg-2" x="105" y="180" width="10" height="30" fill="#D87B60" />
+        <rect class="leg-3" x="125" y="180" width="10" height="30" fill="#D87B60" />
+        <rect class="leg-4" x="145" y="180" width="10" height="30" fill="#D87B60" />
+
+        <rect x="85" y="120" width="70" height="60" fill="#D87B60" />
+
+        <rect class="arm-right" x="155" y="140" width="20" height="20" fill="#D87B60" />
+
+        <g class="face-shift" fill="#000000">
+          <rect x="95" y="135" width="10" height="10" />
+          <rect x="135" y="135" width="10" height="10" />
+        </g>
+
+      </g>
+    </g>
+  </g>
+</svg>
