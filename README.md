@@ -2,7 +2,7 @@
 
 A borderless animated notification that appears on your Windows desktop when Claude Code finishes a task. Features the Claude Code mascot doing a jumping animation in a dark rounded popup at the bottom-right of your screen.
 
-![Claude Code notification popup demo](notification.gif)
+![Claude Code notification popup demo](notification_1.svg)
 
 ---
 
